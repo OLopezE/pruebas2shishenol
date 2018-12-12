@@ -1,0 +1,268 @@
+    <div class="pro_box" ng-show="!vm.isLicenseActive">
+    <a href="#!/checkout#_=_"><button class="button_cart add-to-cart" type="button">Comprar<br>Versión <span class="pro">Pro</span></button></a>
+    </div>
+
+
+   <div class="business-interests">
+        <div class="row">
+
+<section id="section_one" class="section1">
+     <img src="/alex-system/assets/img/avatar.png" height="15%" class="avatar2">
+     <br>
+      <div>
+        <span class="hi">¡Bienvenido!</span>
+      </div>
+
+<div class="text" id="typedtext"></div>
+<br>
+<div id="NavButton" class="bounce">
+
+    
+        <div class="arrow" ng-click="vm.next('section_two')"></div></a>
+    
+</div>
+
+
+</section> 
+
+<section id="section_two" class="section2">
+<div class="col-lg-6">
+<div class="search-area_bottom-area">
+   <div class="text_section2">
+    Escribe la dirección de un lugar donde te gustaría ubicar tu negocio.
+    O puedes usar el mapa para ubicar el punto moviendo el globo azúl.
+   </div> 
+
+    <div>
+        <input places-auto-complete ng-model="vm.address"                               
+        on-place-changed="vm.placeChanged()"                   
+        placeholder="Escribe la dirección que deseas evaluar" type="text" name="address" required
+        />        
+    </div>
+
+    <div class="error-message" ng-show="(searchForm.$submitted || searchForm.address.$touched) && searchForm.address.$error.required">Escriba una dirección o elija un punto en el mapa.</div>
+</div> 
+<br>
+ 
+        <div class="hidden" ng-dropdown-multiselect="" options="vm.locations" selected-model="vm.locationsSelect" extra-settings="vm.locationsSettings"></div>  
+<br><br><br>
+<div id="NavButton" class="bounce">
+
+        
+        <div class="arrow" ng-click="vm.next('section_three')"></div>
+    
+</div>
+
+</div>
+<div id="mapaa" class="map-area col-lg-6" ng-hide="vm.loading">                   
+            <div class="map-area_map-vignette" ng-if="vm.location.path() == '/search' || vm.location.path() == ''">                                                                
+                <ng-map id="googleMap"                   
+                  default-style="false"
+                  zoom="{{vm.mapZoom}}"
+                  center="{{vm.mapLat}}, {{vm.mapLng}}">
+                </ng-map>
+            </div> 
+            <div class="map-area_tool-area">
+                <input class="button button-one2" type="button" value="Centrar mapa" ng-click="vm.centerMap(null, vm.mapLat, vm.mapLng)">
+            </div>            
+        </div>
+</section>
+<section id="section_three" class="section3">
+<div class="col-lg-12">
+        <span id="text_section3">¿Qué tipo de negocio quieres abrir?</span>
+    <br><br>
+        <select ng-model="vm.googleCategory" ng-options="x.label for x in vm.categories" name="serviceType" required>
+        </select>
+       
+        <div class="error-message" ng-show="(searchForm.$submitted || searchForm.serviceType.$touched) && searchForm.serviceType.$error.required && vm.searchCompetitors">Ingrese un tipo de negocio que le gustaría abrir.</div>
+<br>
+        
+        <input type="text" class="input_sec3" placeholder="Agrega aquí otras palabras que me ayuden a buscar a tu competencia" ng-model="vm.service" name="service">
+
+<br>
+<br><br><br><br>
+    <div id="NavButton" class="bounce">
+
+        
+        <div class="arrow" ng-click="vm.next('section_four')"></div>
+    
+    </div>
+
+
+    </div>
+</section>
+
+<section id="section_four" class="section4">
+<br>
+    <span class="tittle_4">Descríbeme a tu cliente ideal:</span>
+
+<div class="row">
+        <br>
+        
+            <div class="btnSx" data-toggle="buttons">
+                <label class="btn btn-primary active" ng-click="vm.genreOption = '0'">
+                    <input type="radio" name="genreOption" value="0" autocomplete="off" checked> Todos
+                </label>
+                <label class="btn btn-primary" ng-click="vm.genreOption = '1'">
+                    <input type="radio" name="genreOption" value="1" autocomplete="off"> Hombres
+                </label>
+                <label class="btn btn-primary" ng-click="vm.genreOption = '2'">
+                    <input type="radio" name="genreOption" value="2" autocomplete="off"> Mujeres
+                </label>
+            </div>
+        </div>
+   
+<br>
+        <div class="text4">Edades: &nbsp
+        
+            <select name="ageSelectLow" id="ageSelectLow" ng-model="vm.ageSelectLow" ng-init="vm.ageSelectLow = '18'">                
+                <option ng-repeat="n in vm.underscore.range(13, 66)" value="{{n}}">{{n}}</option>
+            </select>&nbsp a &nbsp
+            <select name="ageSelectHigh" id="ageSelectHigh" ng-model="vm.ageSelectHigh" ng-init="vm.ageSelectHigh = '65'">
+                <option ng-repeat="n in vm.underscore.range(13, 66)" value="{{n}}">{{n}}</option>
+            </select>
+        </div>
+    <br>
+    <div class="nve">
+     <select ng-model="vm.level">
+                    <option value="" disabled selected>Nivel Socio-Económico</option>
+                    <option value="0">Todos</option>
+                    <option value="1">Alto</option>
+                    <option value="2">Medio</option>
+                    <option value="3">Bajo</option>
+                </select>
+    </div>
+          <br>
+          <div id="NavButton" class="bounce">
+
+        
+        <div class="arrow" ng-click="vm.next('section_five')"></div>
+    
+    </div>
+  </section>
+
+
+<section id="section_five" class="section5">
+    
+        <span class="text4">Busca en mi base de datos los comportamientos e intereses de tu cliente ideal</span>
+        <span>Ejemplo: "Café"</span>
+        <div class="row">
+            <div >
+
+                <div class="btnSx" data-toggle="buttons">
+                    <label class="btn btn-primary active" ng-click="vm.setDetailedTargetingType('search')">
+                        <input type="radio" name="detailedTargetingOption" value="0" autocomplete="off" checked> Busqueda
+                    </label>
+                    <label class="btn btn-primary" ng-click="vm.setDetailedTargetingType('suggestions')">
+                        <input type="radio" name="detailedTargetingOption" value="1" autocomplete="off"> Sugerencias
+                    </label>
+                    <div class="blocks" data-toggle="buttons">
+                    <multiselect
+            ng-model="vm.interestsSelect" 
+            options="vm.detailedTargetingOptions"
+            search-filter="vm.searchFilter" 
+            show-search="vm.showSearchInterests"
+            id-prop="id" 
+            display-prop="label"
+            show-select-all="true"
+            show-unselect-all="true"
+            >
+        </multiselect>
+                </div>
+                </div>  
+            </div>
+        </div>
+       <br>
+     
+ 
+        <span class="text4">Si te es necesario puedes agregar otro comportamiento o interés. Ejemplo: “Café y libros”</span>
+        <div class="row">
+            <div >
+                <div class="btnSx" data-toggle="buttons">
+                
+                    <label class="btn btn-primary active" ng-click="vm.setRefinedDetailedTargetingType('search')">
+                        <input type="radio" name="refinedDetailedTargetingOption" value="0" autocomplete="off" checked> Busqueda
+                    </label>
+                    <label class="btn btn-primary" ng-click="vm.setRefinedDetailedTargetingType('suggestions')">
+                        <input type="radio" name="refinedDetailedTargetingOption" value="1" autocomplete="off"> Sugerencias
+                    </label>
+                </div>
+                    <div class="blocks" data-toggle="buttons">
+                    <multiselect 
+            ng-model="vm.refinedInterestsSelect" 
+            options="vm.refinedDetailedTargetingOptions" 
+            search-filter="vm.refinedSearchFilter"
+            show-search="vm.showRefinedSearchInterests"
+            id-prop="id" 
+            display-prop="label"
+            show-select-all="true"
+            show-unselect-all="true"
+        >
+        </multiselect> 
+                </div>
+            </div>
+        </div>
+    
+        
+ 
+         <div class="row text4">
+        <div >
+            <br>
+            <label>
+                <input type="checkbox" name="doCompetitionAnalisis" ng-model="vm.searchCompetitors"> ¿Quieres que busque también
+                competidores?
+            </label>
+
+
+        </div>
+    </div>
+<br>
+
+
+</section>
+              
+
+<script>
+// set up text to print, each item in array is new line
+var aText = new Array(
+"Hola! Soy Alex.",
+"Fuí creado para ayudarte a encontrar clientes potenciales y competidores en cualquier ciudad de México, ésta información te permitirá identificar zonas viables para ubicar tu negocio. ", 
+" Una vez que tengas identificadas zonas candidatas, puedo ayudarte a lanzar un anuncio de 'próxima apertura' y medir la reacción del mercado en cada zona candidata que hayas elegido.", 
+" En caso de que tengas dudas o comentarios, puedes hablar conmigo usando el chat en linea que esta en la parte inferior derecha.",
+);
+var iSpeed = 50; // time delay of print out
+var iIndex = 0; // start printing array at this posision
+var iArrLength = aText[0].length; // the length of the text array
+var iScrollAt = 20; // start scrolling up at this many lines
+ 
+var iTextPos = 0; // initialise text position
+var sContents = ''; // initialise contents variable
+var iRow; // initialise current row
+ 
+function typewriter()
+{
+ sContents =  ' ';
+ iRow = Math.max(0, iIndex-iScrollAt);
+ var destination = document.getElementById("typedtext");
+ 
+ while ( iRow < iIndex ) {
+  sContents += aText[iRow++] + '<br />';
+ }
+ destination.innerHTML = sContents + aText[iIndex].substring(0, iTextPos) + "|";
+ if ( iTextPos++ == iArrLength ) {
+  iTextPos = 0;
+  iIndex++;
+  if ( iIndex != aText.length ) {
+   iArrLength = aText[iIndex].length;
+   setTimeout("typewriter()", 500);
+  }
+ } else {
+  setTimeout("typewriter()", iSpeed);
+ }
+}
+
+
+typewriter();
+
+</script>
+
